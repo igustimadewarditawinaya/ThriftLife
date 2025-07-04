@@ -23,12 +23,15 @@ try {
         
         // Create pelanggan table if it doesn't exist
         $createTableSQL = "CREATE TABLE IF NOT EXISTS pelanggan (
-            id_pelanggan SERIAL PRIMARY KEY,
-            nama VARCHAR(255) NOT NULL,
-            email VARCHAR(255) UNIQUE,
-            password VARCHAR(255),
-            alamat TEXT,
-            telepon VARCHAR(20),
+            id_pelanggan VARCHAR(50) PRIMARY KEY,
+            nama_pelanggan VARCHAR(255) NOT NULL,
+            email_pelanggan VARCHAR(255) UNIQUE,
+            password_pelanggan VARCHAR(255),
+            alamat_pelanggan TEXT,
+            telepon_pelanggan VARCHAR(20),
+            foto_pelanggan VARCHAR(255),
+            jk_pelanggan VARCHAR(10),
+            tgl_lahir DATE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
         $pdo->exec($createTableSQL);
@@ -45,12 +48,15 @@ try {
         
         // Create pelanggan table if it doesn't exist for MySQL
         $createTableSQL = "CREATE TABLE IF NOT EXISTS pelanggan (
-            id_pelanggan INT AUTO_INCREMENT PRIMARY KEY,
-            nama VARCHAR(255) NOT NULL,
-            email VARCHAR(255) UNIQUE,
-            password VARCHAR(255),
-            alamat TEXT,
-            telepon VARCHAR(20),
+            id_pelanggan VARCHAR(50) PRIMARY KEY,
+            nama_pelanggan VARCHAR(255) NOT NULL,
+            email_pelanggan VARCHAR(255) UNIQUE,
+            password_pelanggan VARCHAR(255),
+            alamat_pelanggan TEXT,
+            telepon_pelanggan VARCHAR(20),
+            foto_pelanggan VARCHAR(255),
+            jk_pelanggan VARCHAR(10),
+            tgl_lahir DATE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
         $koneksi->query($createTableSQL);

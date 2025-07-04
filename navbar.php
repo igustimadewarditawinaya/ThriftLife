@@ -2,16 +2,17 @@
 // Remove the problematic code that was causing database errors
 // Only execute database queries when session is properly set
 if (isset($_SESSION["pelanggan"]) && isset($_SESSION["pelanggan"]["id_pelanggan"])) {
-    $id_pelanggan = intval($_SESSION["pelanggan"]["id_pelanggan"]);
-    if ($id_pelanggan > 0) {
-        $stmt = $koneksi->prepare("SELECT * FROM pelanggan WHERE id_pelanggan = ?");
+    $id_pelanggan = $_SESSION["pelanggan"]["id_pelanggan"];
+    if (!empty($id_pelanggan)) {
         if (strpos(get_class($koneksi), 'PDO') !== false) {
             // PDO
+            $stmt = $koneksi->prepare("SELECT * FROM pelanggan WHERE id_pelanggan = ?");
             $stmt->execute([$id_pelanggan]);
             $pecah = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
             // MySQLi
-            $stmt->bind_param("i", $id_pelanggan);
+            $stmt = $koneksi->prepare("SELECT * FROM pelanggan WHERE id_pelanggan = ?");
+            $stmt->bind_param("s", $id_pelanggan);
             $stmt->execute();
             $result = $stmt->get_result();
             $pecah = $result->fetch_assoc();
