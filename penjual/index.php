@@ -48,7 +48,7 @@ if(empty($_SESSION['penjual']) OR !isset($_SESSION['penjual']))
  			<ul id="slide-out" class="sidenav"  >
 		<li class="text-center">
 			<?php $ambil=$koneksi->query("SELECT * FROM toko WHERE id_toko='$_SESSION[penjual]'  "); ?>
-			<?php while($pecah=$ambil->fetch_assoc()){ ?>
+			<?php while($pecah=$ambil->fetch(PDO::FETCH_ASSOC)){ ?>
 				<img src="../assets/img/toko/<?= $pecah['foto_toko'] 	 ?> " class="user-image img-responsive"/>
 				<h5 class="brown-text"><?php echo $pecah['nama_toko'] ; ?></h5>
 			<?php } ?>
@@ -57,7 +57,7 @@ if(empty($_SESSION['penjual']) OR !isset($_SESSION['penjual']))
 
 		$id_toko = $_SESSION["penjual"];
 		$ambil=$koneksi->query("SELECT * FROM toko WHERE id_toko='$id_toko'");
-		while($pecah=$ambil->fetch_assoc()) { ?>
+		while($pecah=$ambil->fetch(PDO::FETCH_ASSOC)) { ?>
 			<li><a href="index.php"><i class="tiny material-icons">home</i>Home</a></li>
 			<li><a href="index.php?halaman=profiltoko"><i class="tinty material-icons">store</i>Profil Toko</a></li>
 			<li><a href="index.php?halaman=produk"><i class="tiny material-icons">local_offer</i>Produk</a></li>
@@ -152,4 +152,4 @@ if(empty($_SESSION['penjual']) OR !isset($_SESSION['penjual']))
 // });
 </script>
 </body>
-</html> 
+</html>
