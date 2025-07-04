@@ -1,6 +1,6 @@
- <?php 
+<?php 
 	$ambil = $koneksi->query("SELECT * FROM pelanggan WHERE id_pelanggan='$_GET[id]' ");
-	$pecah= $ambil->fetch_assoc();
+	$pecah= $ambil->fetch(PDO::FETCH_ASSOC);
 	$fotopelanggan = $pecah['foto_pelanggan'];
 	if(file_exists("../pelanggan/$fotopelanggan"))
 	{

@@ -4,7 +4,7 @@ $id_produk = $_GET["idproduk"];
 
 //ambil dulu datanya
 $ambilfoto = $koneksi->query("SELECT * FROM produk_foto WHERE id_produk_foto='$id_foto'");
-$detailfoto= $ambilfoto->fetch_assoc();	
+$detailfoto= $ambilfoto->fetch(PDO::FETCH_ASSOC);	
 
 $namafilefoto = $detailfoto["nama_produk_foto"];
 // hapus file foto dari folder

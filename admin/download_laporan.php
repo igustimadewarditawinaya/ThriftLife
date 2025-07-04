@@ -24,10 +24,10 @@ $ambil = $koneksi->query("SELECT * FROM pembelian
 		JOIN toko ON pembelian.id_toko=toko.id_toko
 		WHERE pembelian.id_pengiriman='$status' AND tanggal_pembelian BETWEEN 
 		'$tgl_mulai' AND '$tgl_selesai' ");
-	while($pecah = $ambil->fetch_assoc())
-	{
-		$semuadata[]=$pecah;
-	}
+while($pecah = $ambil->fetch(PDO::FETCH_ASSOC))
+{
+	$semuadata[]=$pecah;
+}
 
 $isi= "<h1><center>Laporan Penjualan ".$semuadata['status_pengiriman']."tanggal ".date("d F Y",strtotime($tgl_mulai))." Sampai ".date("d F Y",strtotime($tgl_selesai))."</center></h1>";
 $isi.= "<table  border='1' cellpadding='10' cellspacing='0' text-align='center'>";
