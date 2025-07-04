@@ -1,4 +1,18 @@
 <?php 
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+session_start();
+
+include "koneksi.php"; // Pastikan file ini ada dan tidak error
+
+if (!isset($_SESSION['pelanggan'])) {
+	echo "<script>alert('Anda Belum Terdaftar');</script>";
+	echo "<script>location='login.php';</script>";
+	exit;
+}
+?>
+
 //koneksi ke database
 session_start();
 include"koneksi.php";
