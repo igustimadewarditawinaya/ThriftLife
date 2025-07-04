@@ -4,7 +4,7 @@
 			<div class="col l6 s12">
 				<h5 class="white-text">Thriftlife</h5>
 				<p class="grey-text text-lighten-4">ThriftLife – Platform Jual Beli Barang Bekas untuk Anak Kos & Mahasiswa di Jogja.
-Hidup hemat, praktis, dan ramah lingkungan dimulai dari sini.</p>
+Hidup hemat, praktis, dan ramah lingkungan dimulai dari sini.<br>Proyek ini tidak dimaksudkan untuk tujuan komersial dan hanya digunakan sebagai media pembelajaran.</br></p>
 			</div>
 			<div class="col l3 s12">
 				<h5 class="white-text">Contact Us</h5>
