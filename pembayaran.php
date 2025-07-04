@@ -1,4 +1,4 @@
-  <?php 
+<?php 
 //koneksi ke database
   session_start();
   include"koneksi.php";
@@ -14,7 +14,7 @@
   <?php 
   $idpem = $_GET["id"];
   $ambil = $koneksi->query("SELECT * FROM pembelian WHERE id_pembelian='$idpem'");
-  $detpem = $ambil->fetch_assoc();
+  $detpem = $ambil->fetch(PDO::FETCH_ASSOC);
 
 
 // mendapatkan id_pelanggan yang beli
