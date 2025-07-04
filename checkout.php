@@ -1,4 +1,4 @@
- <?php 
+<?php 
 //koneksi ke database
 session_start();
 include"koneksi.php";
@@ -54,7 +54,7 @@ if (!isset($_SESSION['keranjang']) OR empty($_SESSION['keranjang']))
 						<!-- menampilkan produk berdasarkan id_produk -->
 						<?php
 						$ambil = $koneksi->query("SELECT * FROM produk LEFT JOIN toko ON produk.id_toko=toko.id_toko WHERE id_produk='$id_produk'");
-						$pecah = $ambil->fetch_assoc();
+						$pecah = $ambil->fetch(PDO::FETCH_ASSOC);
 						$subharga =$pecah["harga_produk"]*$jumlah;
 						// subharga diperoleh dari berat produk x jumlah
 						$subberat = $pecah["berat_produk"]*$jumlah;
