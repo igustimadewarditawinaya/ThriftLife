@@ -35,7 +35,7 @@
         OR telepon_pelanggan  LIKE '%$keyword%'
         LIMIT ".$limitStart.",".$limit);
       $nomor = $limitStart + 1;
-      while($row = mysqli_fetch_array($SqlQuery)){   
+      while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){   
        ?>
 		<tr>
 				<td><?php echo $nomor ; ?></td>
@@ -59,7 +59,7 @@
 		$SqlQuery = mysqli_query($koneksi, "SELECT * FROM pelanggan
 			LIMIT ".$limitStart.",".$limit);
 		$nomor = $limitStart + 1;
-		while($row = mysqli_fetch_array($SqlQuery)){ 
+		while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){
 			?>
 			<tr>
 				<td><?php echo $nomor ; ?></td>
@@ -96,10 +96,8 @@
     <?php }  ?>
 
     <?php
-    $SqlQuery = mysqli_query($koneksi, "SELECT * FROM pelanggan");        
-
-      //Hitung semua jumlah data yang berada pada tabel Sisawa
-    $JumlahData = mysqli_num_rows($SqlQuery);
+    $SqlQuery = $koneksi->query("SELECT * FROM pelanggan");        
+    $JumlahData = $SqlQuery->rowCount();
 
       // Hitung jumlah halaman yang tersedia
     $jumlahPage = ceil($JumlahData / $limit); 

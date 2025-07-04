@@ -1,10 +1,9 @@
- <?php 
+<?php 
 $datakategori = array();
-
 $ambil = $koneksi->query("SELECT * FROM kategori");
-while($tiap = $ambil->fetch_assoc())
+while($tiap = $ambil->fetch(PDO::FETCH_ASSOC))
 {
-	$datakategori[] = $tiap;
+    $datakategori[] = $tiap;
 }
  
 // echo"<pre>";

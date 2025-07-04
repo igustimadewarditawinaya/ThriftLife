@@ -1,4 +1,4 @@
- <h2><center>Data Pembelian</center></h2>
+<h2><center>Data Pembelian</center></h2>
 <br>
  <div class="row">
     <form action="" method="post" autocomplete="off">
@@ -41,7 +41,7 @@
       ORDER BY id_pembelian
       LIMIT ".$limitStart.",".$limit);
     $nomor = $limitStart + 1;
-    while($row = mysqli_fetch_array($SqlQuery)){   
+    while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){   
      ?>
        <tr>
        	<td><?php echo $nomor; ?></td>
@@ -83,7 +83,7 @@
 
      $nomor = $limitStart + 1;
 
-     while($row = mysqli_fetch_array($SqlQuery)){ 
+     while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){ 
 		 ?>
 		<tr>
 			<td><?php echo $nomor; ?></td>
@@ -128,12 +128,8 @@
     <?php }  ?>
 
     <?php
-    $SqlQuery = mysqli_query($koneksi, "SELECT * FROM pembelian 
-		JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
-		JOIN toko ON pembelian.id_toko=toko.id_toko");        
-
-      //Hitung semua jumlah data yang berada pada tabel Sisawa
-    $JumlahData = mysqli_num_rows($SqlQuery);
+    $SqlQuery = $koneksi->query("SELECT * FROM pembelian");        
+    $JumlahData = $SqlQuery->rowCount();
 
       // Hitung jumlah halaman yang tersedia
     $jumlahPage = ceil($JumlahData / $limit); 
