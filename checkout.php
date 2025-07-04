@@ -188,7 +188,7 @@ if (!isset($_SESSION['keranjang']) OR empty($_SESSION['keranjang']))
 						$id_toko = $pecah['id_toko'];
 						$tanggal_pembelian = date('Y-m-d');
 						$alamat_pengiriman = $_POST['alamat_pengiriman'];
-						$totalberat=$_POST["totalberat"];            
+						$totalberat=$_POST["total_berat"];            
 						$provinsi=$_POST["provinsi"];            
 						$distrik=$_POST["distrik"];              
 						$tipe=$_POST["tipe"];                    
@@ -207,7 +207,7 @@ if (!isset($_SESSION['keranjang']) OR empty($_SESSION['keranjang']))
 							VALUES ('$id_pelanggan','$id_toko','$tanggal_pembelian','$total_pembelian','$alamat_pengiriman','$totalberat','$provinsi','$distrik','$tipe','$kodepos','$ekspedisi','$paket','$ongkir','$estimasi') ");
 
 				// mendapatkan id_pembelian barusan terjadi
-						$id_pembelian_barusan = $koneksi->insert_id;
+						$id_pembelian_barusan = $koneksi->lastInsertId();
 
 						foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) 
 						{
