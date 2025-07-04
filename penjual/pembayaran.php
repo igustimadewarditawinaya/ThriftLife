@@ -8,12 +8,12 @@ $ambil = $koneksi->query("SELECT * FROM pembayaran
 	JOIN pembelian ON pembayaran.id_pembelian = pembelian.id_pembelian
 	WHERE pembayaran.id_pembelian='$id_pembelian'");
 
-$detail= $ambil->fetch_assoc();
+$detail = $ambil->fetch(PDO::FETCH_ASSOC);
 
 $datapengiriman = array();
 
 $ambil = $koneksi->query("SELECT * FROM pengiriman");
-while($tiap = $ambil->fetch_assoc())
+while($tiap = $ambil->fetch(PDO::FETCH_ASSOC))
 {
 	$datapengiriman[] = $tiap;
 }
