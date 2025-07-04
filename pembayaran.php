@@ -163,7 +163,7 @@
 </body>
 <!-- footer -->
 <?php include"footer.php" ;?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/assets/js/materialize.min.js"></script>
 <script>
   //sidenav
   const sidenav = document.querySelectorAll('.sidenav');
