@@ -14,23 +14,22 @@ $id_toko	= $_SESSION["penjual"];
 
 if (isset($_POST["kirim"])) 
 {
-	$tgl_mulai = $_POST["tglm"];
-	$tgl_selesai= $_POST["tgls"];
-	$status = $_POST["status"];
-	$ambil = $koneksi->query("SELECT * FROM pembelian 
-		JOIN pelanggan  ON pembelian.id_pelanggan=pelanggan.id_pelanggan
-		JOIN toko ON pembelian.id_toko = toko.id_toko 
-		JOIN pengiriman ON pembelian.id_pengiriman=pengiriman.id_pengiriman 
-		WHERE  pembelian.id_toko = '$id_toko'
-		AND pembelian.id_pengiriman='$status' 
-		AND tanggal_pembelian BETWEEN '$tgl_mulai' AND '$tgl_selesai' ");
-	while($pecah = $ambil->fetch(PDO::FETCH_ASSOC))
-	{
-		$semuadata[]=$pecah;
-	}
-	 // echo "<pre>";
-	 // print_r($semuadata);
-	 // echo "</pre>";
+    $tgl_mulai = isset($_POST["tglm"]) ? $_POST["tglm"] : null;
+    $tgl_selesai = isset($_POST["tgls"]) ? $_POST["tgls"] : null;
+    $status = isset($_POST["status"]) ? $_POST["status"] : null;
+    if ($tgl_mulai && $tgl_selesai && $status) {
+        $ambil = $koneksi->query("SELECT * FROM pembelian 
+            JOIN pelanggan  ON pembelian.id_pelanggan=pelanggan.id_pelanggan
+            JOIN toko ON pembelian.id_toko = toko.id_toko 
+            JOIN pengiriman ON pembelian.id_pengiriman=pengiriman.id_pengiriman 
+            WHERE  pembelian.id_toko = '$id_toko'
+            AND pembelian.id_pengiriman='$status' 
+            AND tanggal_pembelian BETWEEN '$tgl_mulai' AND '$tgl_selesai' ");
+        while($pecah = $ambil->fetch(PDO::FETCH_ASSOC))
+        {
+            $semuadata[]=$pecah;
+        }
+    }
 }
 ?>
 

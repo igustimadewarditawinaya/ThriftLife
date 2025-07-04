@@ -1,4 +1,4 @@
- <?php
+<?php
 include '../koneksi.php';
 
 // Require composer autoload
@@ -26,7 +26,7 @@ $ambil = $koneksi->query("SELECT * FROM pembelian
 		WHERE  pembelian.id_toko = '$id_toko'
 		AND pembelian.id_pengiriman='$status' AND tanggal_pembelian BETWEEN 
 		'$tgl_mulai' AND '$tgl_selesai' ");
-	while($pecah = $ambil->fetch_assoc())
+	while($pecah = $ambil->fetch(PDO::FETCH_ASSOC))
 	{
 		$semuadata[]=$pecah;
 	}

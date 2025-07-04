@@ -1,10 +1,10 @@
- <?php 
+<?php 
 include '../koneksi.php';
 $ambil = $koneksi->query("SELECT * FROM pembelian 
 	JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
 	JOIN toko ON pembelian.id_toko=toko.id_toko
 	WHERE pembelian.id_pembelian='$_GET[id]'");
-$detail=$ambil->fetch_assoc(); 
+$detail = $ambil->fetch(PDO::FETCH_ASSOC); 
 ?>
 	<style>
 		.watermark{
@@ -109,7 +109,7 @@ $detail=$ambil->fetch_assoc();
 							<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN produk LEFT JOIN toko 
 								ON produk.id_toko=toko.id_toko  
 								ON pembelian_produk.id_produk=produk.id_produk  WHERE id_pembelian='$_GET[id]'"); ?>
-								<?php while ($pecah=$ambil->fetch_assoc()) { ?>
+								<?php while ($pecah=$ambil->fetch(PDO::FETCH_ASSOC)) { ?>
 									<tr>	
 										<td><?php echo $nomor; ?></td>
 										<td><?php echo $pecah['nama']; ?></td>
@@ -133,4 +133,4 @@ $detail=$ambil->fetch_assoc();
 
 		<a href="index.php?halaman=data_penjualan" class="btn">kembali</a>
 				</div>	
-			</div>		
+			</div>
