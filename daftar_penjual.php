@@ -25,7 +25,7 @@ if (!isset($_SESSION['pelanggan'])) {
 	$id_pelanggan = $_SESSION['pelanggan']['id_pelanggan'];
 	$ambil=$koneksi->query("SELECT * FROM pelanggan
 		WHERE id_pelanggan='$id_pelanggan' ");
-	while($pelanggan = $ambil->fetch_assoc())
+	while($pelanggan = $ambil->fetch(PDO::FETCH_ASSOC))
 	{
 
 		?>
