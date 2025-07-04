@@ -1,5 +1,3 @@
-
-
 <section id="highlights" class="highlights scrollspy">
 	<div class="container">
 		<h1 class="center-align">Produk Terbaru</h1>
@@ -9,7 +7,7 @@
 			JOIN toko ON produk.id_toko=toko.id_toko
 			ORDER BY id_produk DESC
 			LIMIT 8 "); ?>
-		<?php while($perproduk = $ambil->fetch_assoc()){ ?>
+		<?php while($perproduk = $ambil->fetch(PDO::FETCH_ASSOC)){ ?>
 				<div class="grid-example col m3 s12">
 					<div class=" responisve-card card hoverable">
 						<div class="card-image waves-effect waves-block waves-light">

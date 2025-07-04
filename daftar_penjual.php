@@ -18,7 +18,7 @@ if (!isset($_SESSION['pelanggan'])) {
 	<title>Daftar Penjual | Thriftlife </title>
 </head>
 <body>
-	<!--Navbar-->
+	<!---Navbar--->
 	<?php include"navbar.php" ?>
 
 	<?php
