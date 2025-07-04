@@ -47,7 +47,7 @@ if (!isset($_SESSION['pelanggan']))
 				JOIN pengiriman ON pembelian.id_pengiriman =pengiriman.id_pengiriman
 				JOIN toko ON pembelian.id_toko = pembelian.id_toko
 				WHERE pembelian.id_pembelian='$_GET[id]'");
-			$detail=$ambil->fetch_assoc(); 
+			$detail=$ambil->fetch(PDO::FETCH_ASSOC); 
 			?>
 			<!-- <pre><?php print_r($detail); ?></pre> -->
 			
@@ -150,34 +150,34 @@ if (!isset($_SESSION['pelanggan']))
 						</thead>
 						<tbody>
 							<?php $nomor=1 ; ?>
-							<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN produk LEFT JOIN toko 
-								ON produk.id_toko=toko.id_toko  
-								ON pembelian_produk.id_produk=produk.id_produk  WHERE id_pembelian='$_GET[id]'"); ?>
-								<?php while ($pecah=$ambil->fetch_assoc()) { ?>
-									<tr>	
-										<td><?php echo $nomor; ?></td>
-										<td><?php echo $pecah['nama']; ?></td>
-										<td><?php echo $pecah ['nama_toko'] ?></td>
-										<td>Rp.<?php echo number_format($pecah['harga']); ?></td>
-										<td><?php echo $pecah['berat'] ?>Gr</td>	
-										<td><?php echo $pecah['jumlah']; ?></td>
-										<td><?php echo $pecah['subberat']; ?>Gr	</td>
-										<td>Rp.<?php echo number_format($pecah['subharga']); ?></td>
-
-									</tr>
-
-									<?php $nomor++ ?>
-								<?php } ?>
-								<tr>
-									<td colspan="7"><strong>Total</strong></td>
-									<td><strong>Rp.<?php echo number_format($detail['total_pembelian'] ); ?></strong></td>
-								</tr>
-							</tbody>
-						</table>	
-						<br>
-						<br>
-						<br>
-						<!-- 	<div class="card hoverable"> -->	
+							<?php 
+							$ambil=$koneksi->query("SELECT * FROM pembelian_produk 
+								JOIN produk ON pembelian_produk.id_produk=produk.id_produk 
+								LEFT JOIN toko ON produk.id_toko=toko.id_toko  
+								WHERE pembelian_produk.id_pembelian='$_GET[id]'"); 
+							while ($pecah=$ambil->fetch(PDO::FETCH_ASSOC)) { ?>
+							<tr>
+								<td><?php echo $nomor; ?></td>
+								<td><?php echo $pecah['nama']; ?></td>
+								<td><?php echo $pecah ['nama_toko'] ?></td>
+								<td>Rp.<?php echo number_format($pecah['harga']); ?></td>
+								<td><?php echo $pecah['berat'] ?>Gr</td>	
+								<td><?php echo $pecah['jumlah']; ?></td>
+								<td><?php echo $pecah['subberat']; ?>Gr	</td>
+								<td>Rp.<?php echo number_format($pecah['subharga']); ?></td>
+							</tr>
+							<?php $nomor++ ?>
+							<?php } ?>
+							<tr>
+								<td colspan="7"><strong>Total</strong></td>
+								<td><strong>Rp.<?php echo number_format($detail['total_pembelian'] ); ?></strong></td>
+							</tr>
+						</tbody>
+					</table>	
+					<br>
+					<br>
+					<br>
+					<!-- 	<div class="card hoverable"> -->	
 				<!-- 	<div class="row">
 						<div class="col-md-7">
 							<div class="alert alert-info">
