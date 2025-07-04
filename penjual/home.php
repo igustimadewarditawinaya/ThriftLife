@@ -1,16 +1,16 @@
-  <?php
+<?php
  $id_toko =$_SESSION['penjual'];
  $ambil=$koneksi->query("SELECT * FROM toko 
  	LEFT JOIN pelanggan ON toko.id_toko=pelanggan.id_pelanggan
  	WHERE id_toko='$id_toko' ");
-    $pecah = $ambil->fetch_assoc() ;?>
+    $pecah = $ambil->fetch(PDO::FETCH_ASSOC) ;?>
     <h2 class="text-center">Selamat Datang <br> <?php echo $pecah['nama_toko']; ?></h2>
 <br> <br> <br>  
     <?php
     $ambil= $koneksi->query("SELECT * FROM produk 
         LEFT JOIN toko ON produk.id_toko=toko.id_toko
         WHERE produk.id_toko='$id_toko'");
-    while ($pecah = $ambil->fetch_assoc()) {
+    while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
        $data[]= $pecah;
    }
    $produk = 0;
