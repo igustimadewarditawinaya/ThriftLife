@@ -3,7 +3,7 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      - main   # atau main, sesuaikan dengan branch utama Anda
+      - main
 
 jobs:
   build-and-deploy:
@@ -16,14 +16,24 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'   # atau versi PHP yang Anda pakai
+          php-version: '8.1'
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+          export PATH="$HOME/.local/share/heroku/bin:$PATH"
+
+      - name: Authenticate with Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo -e "machine api.heroku.com\n  login ${{ secrets.HEROKU_EMAIL }}\n  password $HEROKU_API_KEY\nmachine git.heroku.com\n  login ${{ secrets.HEROKU_EMAIL }}\n  password $HEROKU_API_KEY" > ~/.netrc
+          heroku git:remote -a thriftlife
+
       - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.13.15
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "thriftlife"   # ganti dengan nama app Heroku Anda
-          heroku_email: "aditanaufal@students.amikom.ac.id"    # ganti dengan email Heroku Anda
+        run: |
+          git remote -v
+          git push heroku main --force
