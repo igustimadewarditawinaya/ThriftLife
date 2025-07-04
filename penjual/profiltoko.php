@@ -1,9 +1,9 @@
- <?php 
+<?php 
  $id_toko	= $_SESSION["penjual"]; 
  $ambil=$koneksi->query("SELECT * FROM toko 
  	JOIN pelanggan ON toko.id_toko=pelanggan.id_pelanggan 
  	WHERE toko.id_toko='$id_toko'");
- 	$pecah=$ambil->fetch_assoc(); ?>
+$pecah=$ambil->fetch(PDO::FETCH_ASSOC); ?>
  	<h2 class="center">Profil Toko</h2>
  	 		<div class="" style="margin-top: 50px;">
  			<img src="../assets/img/homepage/backtoko.jpg" height="150" width="350" style="position: absolute; z-index: auto;">
