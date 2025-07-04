@@ -94,7 +94,7 @@ endforeach;
 $ambil= $koneksi->query("SELECT * FROM produk 
   JOIN toko ON produk.id_toko=toko.id_toko
   ");
-while ($pecah = $ambil->fetch_assoc()) {
+while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
  $semuadata[]= $pecah;
 }
 $produk = 0;
