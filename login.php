@@ -41,56 +41,50 @@ include 'koneksi.php';
 		if (isset ($_POST["login"]))
 		{
 			$email = $_POST["email"];
-			$password =sha1( $_POST["password"]);
-	//lakukan query ngecek akun ditabel pelanggan di db
-			$ambil = $koneksi-> query("SELECT * FROM pelanggan 
-				WHERE email_pelanggan='$email' 
-				AND password_pelanggan='$password' ");
+			$password = sha1($_POST["password"]);
+			
+			try {
+				// PostgreSQL uses PDO
+				$stmt = $koneksi->prepare("SELECT * FROM pelanggan WHERE email_pelanggan = ? AND password_pelanggan = ?");
+				$stmt->execute([$email, $password]);
+				$akun = $stmt->fetch(PDO::FETCH_ASSOC);
+				$akunyangcocok = $akun ? 1 : 0;
 
-	// ngitung akun yang terambil
-			$akunyangcocok = $ambil->num_rows;
-
-	//jika 1 akun yang cocok, maka diloginkan
-			if ($akunyangcocok == true)
-			{
-		//anda sudah login
-		//mendapatkan akun dalam array
-				$akun = $ambil->fetch_assoc();
-		// simpern di session pelanggan
-				$_SESSION['pelanggan'] = $akun;
-				if ($_SESSION['pelanggan']['status'] == 'penjual') {
-					$status = 1;
-				} else {
-					$status = 0;
-				}
-				$penjual = 1;
-				if ($status == $penjual) {
-					$_SESSION['penjual'] = $_SESSION['pelanggan']['id_pelanggan'];
-				}
-				echo "<script>alert('anda berhasil login');</script>";
-
-				// jika sudah belanja
-				if (isset($_SESSION["keranjang"]) OR !empty($_SESSION["keranjang"]) ) 
+				//jika 1 akun yang cocok, maka diloginkan
+				if ($akunyangcocok == 1)
 				{
-					echo "<script>location='checkout.php';</script>";
+					//anda sudah login
+					//mendapatkan akun dalam array
+					// simpern di session pelanggan
+					$_SESSION['pelanggan'] = $akun;
+					
+					// Check if user is a seller (only if status column exists)
+					if (isset($_SESSION['pelanggan']['status']) && $_SESSION['pelanggan']['status'] == 'penjual') {
+						$_SESSION['penjual'] = $_SESSION['pelanggan']['id_pelanggan'];
+					}
+					
+					echo "<script>alert('anda berhasil login');</script>";
+
+					// jika sudah belanja
+					if (isset($_SESSION["keranjang"]) && !empty($_SESSION["keranjang"])) 
+					{
+						echo "<script>location='checkout.php';</script>";
+					}
+					else{
+						echo "<script>location='index.php';</script>";
+					}
 				}
-				else{
-					echo "<script>location='index.php';</script>";
+				else
+				{
+					//anda gagal login
+					echo "<script>alert('anda gagal login, periksa akun anda');</script>";
+					echo "<script>location='login.php';</script>";
 				}
-			}
-			else
-			{
-		//anda gagal login
-				echo "<script>alert('anda gagal login, periksa akun anda');</script>";
+			} catch (Exception $e) {
+				echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
 				echo "<script>location='login.php';</script>";
 			}
-
-			// if (isset($_SESSION['pelanggan'])) {
-				
-			// }
-
 		}
-
 		?>
 
 

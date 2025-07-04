@@ -1,5 +1,14 @@
 {
-    "require": {
-        "mpdf/mpdf": "^8.0"
+  "$schema": "https://getcomposer.org/schema.json",
+  "require": {
+    "php": "^8.0",
+    "mpdf/mpdf": "^8.2",
+    "setasign/fpdi": "^2.6",
+    "ext-gd": "*"
+  },
+  "config": {
+    "platform": {
+      "php": "8.2.0"
     }
+  }
 }
