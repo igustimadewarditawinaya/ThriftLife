@@ -1,11 +1,11 @@
-  <h2 class="text-center">Selamat Datang Administrator
+<h2 class="text-center">Selamat Datang Administrator
     <br>   <?php echo $_SESSION['admin']['nama_lengkap'] ;?>
   </h2>
 
   <?php 
   $ambil = $koneksi->query("SELECT * FROM pelanggan ");
-  while ($pecah = $ambil->fetch_assoc()) {
-   $data[] = $pecah;
+  while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
+    $data[] = $pecah;
  }
  $jumlahpelanggan = 0;
  if (isset($data)) {
@@ -21,8 +21,8 @@ endforeach;
 ?>
   <?php 
   $ambil = $koneksi->query("SELECT * FROM toko ");
-  while ($pecah = $ambil->fetch_assoc()) {
-   $hanyadata[] = $pecah;
+  while ($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
+    $hanyadata[] = $pecah;
  }
  $jumlahtoko = 0;
  if (isset($hanyadata)) {
