@@ -133,7 +133,7 @@
         $id_toko = $pecah['id_toko']; 
         $total= $detpem['total_pembelian'];
 
-        if($jumlah !== $total) {
+        if((int)$jumlah != (int)$total) {
           echo "<script>alert('Masukkan Nominal Pemabayaran yang benar');</script>";
         } else {
         // simpan pembayaran
