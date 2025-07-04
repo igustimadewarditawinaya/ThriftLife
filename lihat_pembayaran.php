@@ -1,4 +1,4 @@
- <?php 
+<?php 
 //koneksi ke database
  session_start();
  include'koneksi.php';
@@ -8,7 +8,7 @@
  $ambil=$koneksi->query("SELECT * FROM pembayaran 
  	JOIN pembelian ON pembayaran.id_pembelian=pembelian.id_pembelian
  	WHERE pembelian.id_pembelian='$id_pembelian' ");
- $detbay = $ambil->fetch_assoc();
+ $detbay = $ambil->fetch(PDO::FETCH_ASSOC);
 
 // echo"<pre>";
 // print_r($detbay);
