@@ -17,11 +17,10 @@ if (!isset($_POST['keyword']) OR empty($_POST['keyword'])) {
 	<div class="container">
 		<?php if (isset($_POST['keyword'])): ?>
 		<?php
-		    $keyword= $_POST["keyword"]; 
-			$ambil=$koneksi->query("SELECT * FROM toko
-				
-					WHERE nama_toko LIKE '%$keyword%' ");
-			while ($pecah=$ambil->fetch_assoc()) {?>
+	    $keyword= $_POST["keyword"]; 
+		$ambil=$koneksi->query("SELECT * FROM toko
+				WHERE nama_toko LIKE '%$keyword%' ");
+		while ($pecah=$ambil->fetch(PDO::FETCH_ASSOC)) {?>
 
 			<h2 class="center">Profil Toko</h2>
 			<div class="" style="margin-top: 50px;">
@@ -55,16 +54,16 @@ if (!isset($_POST['keyword']) OR empty($_POST['keyword'])) {
 				</div>
 				<?php
 				$ambil= $koneksi->query("SELECT * FROM produk 
-					LEFT JOIN toko ON produk.id_toko=toko.id_toko
-					WHERE nama_toko LIKE '%$keyword%'");
-				while ($detail = $ambil->fetch_assoc()) {
-					$data[]= $detail;
-				}
-				$produk = 0;
-				$stok_produk = 0;
-				$stok_awal = 0;
-				$produk_terjual = 0;
-				$total_pembelian = 0 ;
+				LEFT JOIN toko ON produk.id_toko=toko.id_toko
+				WHERE nama_toko LIKE '%$keyword%'");
+			while ($detail = $ambil->fetch(PDO::FETCH_ASSOC)) {
+				$data[]= $detail;
+			}
+			$produk = 0;
+			$stok_produk = 0;
+			$stok_awal = 0;
+			$produk_terjual = 0;
+			$total_pembelian = 0 ;
 
 
 				if (isset($data)) {
@@ -131,13 +130,13 @@ if (!isset($_POST['keyword']) OR empty($_POST['keyword'])) {
 
 		<section id="highlights" class="highlights scrollspy">
 				<?php $ambil=$koneksi->query("SELECT * FROM produk 
-					JOIN toko ON produk.id_toko = toko.id_toko
-					JOIN kategori ON produk.id_kategori=kategori.id_kategori
-					WHERE nama_toko LIKE '%$keyword%' 
-					OR nama_produk LIKE '%$keyword%'
-					OR nama_kategori LIKE '%$keyword%'   "); ?>
-					<h1 class="center-align">Produk Terbaru</h1>
-					<?php while($perproduk = $ambil->fetch_assoc()){ ?>
+				JOIN toko ON produk.id_toko = toko.id_toko
+				JOIN kategori ON produk.id_kategori=kategori.id_kategori
+				WHERE nama_toko LIKE '%$keyword%' 
+				OR nama_produk LIKE '%$keyword%'
+				OR nama_kategori LIKE '%$keyword%'   "); ?>
+				<h1 class="center-align">Produk Terbaru</h1>
+				<?php while($perproduk = $ambil->fetch(PDO::FETCH_ASSOC)){ ?>
 						
 			<div class="row">
 						<div class="grid-example col m3 s12">
@@ -173,4 +172,4 @@ if (!isset($_POST['keyword']) OR empty($_POST['keyword'])) {
  ?>  	
 			
 <?php endif ;?>
-			
+
