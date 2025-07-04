@@ -51,7 +51,7 @@ if (isset($_POST["kirim"]))
 					<div class="input-field col s3">
 						<i class="material-icons prefix">date_range</i>
 						<input type="date" name="tgls" max="<?php  echo	date('Y-m-d', time()+60*60*6) ?>" value="<?php echo 	$tgl_selesai ?>">
-					<label>Tanggal Mulai</label>
+					<label>Tanggal Selesai</label>
 					</div>
 				<div class="input-field col s4">
 				<i class="material-icons prefix">assignment_ind</i>

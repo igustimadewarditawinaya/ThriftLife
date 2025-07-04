@@ -40,7 +40,7 @@
   <!-- NAVBAR -->
   <?php include"navbar.php"; ?>
   <div class="container">
-    <h2>Konfrimasi Pembayaran</h2>
+    <h2>Konfirmasi Pembayaran</h2>
     <?php 
     $ambil = $koneksi->query("SELECT * FROM pembelian 
       JOIN toko ON pembelian.id_toko=toko.id_toko  
