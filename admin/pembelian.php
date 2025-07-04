@@ -74,12 +74,12 @@
 
      $limitStart = ($page - 1) * $limit;
 
-     $SqlQuery = mysqli_query($koneksi, "SELECT * FROM pembelian 
-		JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
-		JOIN toko ON pembelian.id_toko=toko.id_toko
-    JOIN pengiriman ON pembelian.id_pengiriman = pengiriman.id_pengiriman
-    ORDER BY id_pembelian
-      LIMIT ".$limitStart.",".$limit);
+     $SqlQuery = $koneksi->query("SELECT * FROM pembelian 
+        JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
+        JOIN toko ON pembelian.id_toko=toko.id_toko
+        JOIN pengiriman ON pembelian.id_pengiriman = pengiriman.id_pengiriman
+        ORDER BY id_pembelian
+        LIMIT ".$limitStart.",".$limit);
 
      $nomor = $limitStart + 1;
 
