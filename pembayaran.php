@@ -43,10 +43,10 @@
     <h2>Konfrimasi Pembayaran</h2>
     <?php 
     $ambil = $koneksi->query("SELECT * FROM pembelian 
-      JOIN TOKO ON pembelian.id_toko=toko.id_toko  
+      JOIN toko ON pembelian.id_toko=toko.id_toko  
       JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
       WHERE id_pembelian   ='$idpem'");
-    while($pecah = $ambil->fetch_assoc()) {
+    while($pecah = $ambil->fetch(PDO::FETCH_ASSOC)) {
      ?>
      <div class="row">
       <div class="col s3">
