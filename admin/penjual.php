@@ -25,69 +25,40 @@
 		</tr>
 	</thead>
 	<tbody >
-		 <?php if ((isset($_POST['keyword']))): ?>
-      <?php  $page = (isset($_GET['page']))? (int) $_GET['page'] : 1;
-      $limit = 10;
-      $limitStart = ($page - 1) * $limit;
-      $keyword= $_POST["keyword"];
-      $SqlQuery=$koneksi->query("SELECT * FROM toko 
-      	JOIN pelanggan ON toko.id_toko = pelanggan.id_pelanggan
-        WHERE email_toko LIKE '%$keyword%' 
-        OR nama_toko LIKE '%$keyword%'
-        LIMIT ".$limitStart.",".$limit);
-      $nomor = $limitStart + 1;
-      while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){   
-       ?>
-		<tr>
-			<td><?php echo $nomor ; ?></td>
-			<td><?php echo $row['nama_pelanggan']; ?></td>
-			<td><?php echo $row['nama_toko'] ; ?></td>
-			<td><img class="circle" src="../assets/img/toko/<?php echo $row['foto_toko']; ?>" width="50" height="50"></td>
-			<td><?php echo 	$row['email_toko']; ?></td>
-			<td><?php echo 	$row['telepon_pelanggan']; ?></td>
-			<td>
-				<a href="index.php?halaman=detailpenjual&id=<?php echo $row['id_toko']; ?>" class="btn cyan waves-effect waves-light">detail</a>
-				<a href="index.php?halaman=hapuspenjual&id=<?php echo $row['id_toko']; ?>" class="btn red waves-effect waves-light">hapus</a>
-			</td>
-		</tr>
-		<?php $nomor++ ?>
-		<?php } ?> 
-		<?php else: ?> 
-	
-		<?php 
-		 $page = (isset($_GET['page']))? (int) $_GET['page'] : 1;
-
-      // Jumlah data per halaman
-     $limit = 10;
-
-     $limitStart = ($page - 1) * $limit;
-
-     $SqlQuery = mysqli_query($koneksi, "SELECT * FROM toko 
-      	JOIN pelanggan ON toko.id_toko = pelanggan.id_pelanggan
-      LIMIT ".$limitStart.",".$limit);
-
-     $nomor = $limitStart + 1;
-
-     while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){
-		 ?>
-		 		<tr>
-			<td><?php echo $nomor ; ?></td>
-			<td><?php echo $row['nama_pelanggan'] ;?></td>
-			<td><?php echo $row['nama_toko'] ; ?></td>
-			<td><img class="circle" src="../assets/img/toko/<?php echo $row['foto_toko']; ?>" width="50" height="50"></td>
-			<td><?php echo 	$row['email_toko']; ?></td>
-			<td><?php echo 	$row['telepon_pelanggan']; ?></td>
-			<td>
-				<a href="index.php?halaman=detailpenjual&id=<?php echo $row['id_toko']; ?>" class="btn cyan waves-effect waves-light">detail</a>
-				<a href="index.php?halaman=hapuspenjual&id=<?php echo $row['id_toko']; ?>" class="btn red waves-effect waves-light">hapus</a>
-			</td>
-		</tr>
-				<?php $nomor++; ?>
-		<?php } ?>
-		<?php endif; ?>
-
-	
-	</tbody>
+        <?php 
+        $page = (isset($_GET['page']))? (int) $_GET['page'] : 1;
+        $limit = 10;
+        $limitStart = ($page - 1) * $limit;
+        if (isset($_POST['keyword'])) {
+            $keyword= $_POST["keyword"];
+            $SqlQuery=$koneksi->query("SELECT * FROM toko 
+                JOIN pelanggan ON toko.id_toko = pelanggan.id_pelanggan
+                WHERE email_toko LIKE '%$keyword%' 
+                OR nama_toko LIKE '%$keyword%'
+                LIMIT ".$limitStart.",".$limit);
+        } else {
+            $SqlQuery = $koneksi->query("SELECT * FROM toko 
+                JOIN pelanggan ON toko.id_toko = pelanggan.id_pelanggan
+                LIMIT ".$limitStart.",".$limit);
+        }
+        $nomor = $limitStart + 1;
+        while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){
+        ?>
+        <tr>
+            <td><?php echo $nomor ; ?></td>
+            <td><?php echo $row['nama_pelanggan']; ?></td>
+            <td><?php echo $row['nama_toko'] ; ?></td>
+            <td><img class="circle" src="../assets/img/toko/<?php echo $row['foto_toko']; ?>" width="50" height="50"></td>
+            <td><?php echo  $row['email_toko']; ?></td>
+            <td><?php echo  $row['telepon_pelanggan']; ?></td>
+            <td>
+                <a href="index.php?halaman=detailpenjual&id=<?php echo $row['id_toko']; ?>" class="btn cyan waves-effect waves-light">detail</a>
+                <a href="index.php?halaman=hapuspenjual&id=<?php echo $row['id_toko']; ?>" class="btn red waves-effect waves-light">hapus</a>
+            </td>
+        </tr>
+        <?php $nomor++ ?>
+        <?php } ?> 
+    </tbody>
 </table>
 <div align="right">
   <ul class="pagination">
