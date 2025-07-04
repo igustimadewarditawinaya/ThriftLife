@@ -41,18 +41,18 @@ include '../koneksi.php';
         <?php 
         if (isset($_POST['login'])) 
         {
-          $ambil=$koneksi->query("SELECT * FROM admin WHERE username='$_POST[user]' 
-            AND password='$_POST[pass]' ");
-          $yangcocok =$ambil->num_rows;
+          $ambil = $koneksi->query("SELECT * FROM admin WHERE username='".$_POST['user']."' 
+            AND password='".$_POST['pass']."' ");
+          $yangcocok = $ambil->rowCount();
           if ($yangcocok==1)
           {
-            $_SESSION['admin']=$ambil->fetch_assoc();
+            $_SESSION['admin']=$ambil->fetch(PDO::FETCH_ASSOC);
             echo "<script>alert('Login Sukses') </script>";
             echo "<meta http-equiv='refresh' content='1;url=index.php'> ";
           } 
           else
           {
-            echo "<script>alert('Login Sukses') </script>";
+            echo "<script>alert('Login Gagal') </script>";
             echo "<meta http-equiv='refresh' content='1;url=login.php'> ";
           }
         }

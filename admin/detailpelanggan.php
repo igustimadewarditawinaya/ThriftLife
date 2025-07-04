@@ -1,7 +1,7 @@
 <?php
 $id_pelanggan= $_GET["id"];
 $ambil = $koneksi->query("SELECT * FROM pelanggan WHERE id_pelanggan='$id_pelanggan'"); 
-$detail_pelanggan =$ambil->fetch_assoc();
+$detail_pelanggan =$ambil->fetch(PDO::FETCH_ASSOC);
 
 
 
@@ -83,7 +83,7 @@ $detail_pelanggan =$ambil->fetch_assoc();
 				JOIN pengiriman ON pembelian.id_pengiriman = pengiriman.id_pengiriman
 				WHERE pembelian.id_pelanggan='$id_pelanggan'
 				ORDER BY pembelian.id_pembelian ");
-			while ( $pecah  = $ambil->fetch_assoc()) {
+			while ( $pecah  = $ambil->fetch(PDO::FETCH_ASSOC)) {
 				?>
 				<tr>
 					<td><?php echo 	$nomor ?></td>
@@ -111,7 +111,7 @@ $detail_pelanggan =$ambil->fetch_assoc();
 
 
 		</table>
-	</div>	
+	</div>
 
 
 

@@ -1,11 +1,11 @@
- <?php 
+<?php 
 $id_produk= $_GET["id"];
 
 $ambil = $koneksi->query("SELECT * FROM produk 
 	JOIN kategori ON produk.id_kategori=kategori.id_kategori 
 	JOIN toko ON produk.id_toko = toko.id_toko
 	WHERE id_produk='$id_produk'");
-$detailproduk = $ambil->fetch_assoc();
+$detailproduk = $ambil->fetch(PDO::FETCH_ASSOC);
 
  ?>
 

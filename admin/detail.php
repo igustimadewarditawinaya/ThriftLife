@@ -1,9 +1,9 @@
 <?php 
 include '../koneksi.php';
 $ambil = $koneksi->query("SELECT * FROM pembelian JOIN pelanggan
-	ON pembelian.id_pelanggan=pelanggan.id_pelanggan
-	WHERE pembelian.id_pembelian='$_GET[id]'");
-$detail=$ambil->fetch_assoc(); 
+    ON pembelian.id_pelanggan=pelanggan.id_pelanggan
+    WHERE pembelian.id_pembelian='$_GET[id]'");
+$detail = $ambil->fetch(PDO::FETCH_ASSOC); 
 ?>
 
 
@@ -48,10 +48,10 @@ $detail=$ambil->fetch_assoc();
 		<tr>
 			<?php $nomor=1 ; ?>
 			<?php $ambil=$koneksi->query("SELECT * FROM pembelian_produk JOIN produk LEFT JOIN toko 
-				ON produk.id_toko=toko.id_toko  
-				ON pembelian_produk.id_produk=produk.id_produk 
-				WHERE pembelian_produk.id_pembelian='$_GET[id]'");?>
-				<?php while ($pecah=$ambil->fetch_assoc()) { ?>
+    ON produk.id_toko=toko.id_toko  
+    ON pembelian_produk.id_produk=produk.id_produk 
+    WHERE pembelian_produk.id_pembelian='$_GET[id]'");?>
+<?php while ($pecah=$ambil->fetch(PDO::FETCH_ASSOC)) { ?>
 					<td><?php echo $nomor ; ?></td>
 					<td><?php echo $pecah['nama_produk']; ?></td>
 					<td><?php echo $pecah['nama_toko']; ?></td>
