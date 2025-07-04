@@ -15,7 +15,7 @@ Hidup hemat, praktis, dan ramah lingkungan dimulai dari sini.</p>
 				</ul>
 			</div>
 			<div class="col l3 s12">
-				<h5 class="white-text"></h5>
+				<h5 class="white-text">Contact</h5>
 				<ul>
 					<li><a class="white-text" target="blank" href=""><i class="fa fa-facebook-official"> | Facebook</i></a></li>
 					<li><a class="white-text" target="blank" href=""><i class="fa fa-instagram"> | Instagram</i></a></li>
