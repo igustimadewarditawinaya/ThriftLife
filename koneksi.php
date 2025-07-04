@@ -1,7 +1,7 @@
 <?php
-if (getenv('CLEARDB_DATABASE_URL')) {
-    // Koneksi Heroku
-    $url = parse_url(getenv('CLEARDB_DATABASE_URL'));
+if (getenv('JAWSDB_URL')) {
+    // Koneksi Heroku JawsDB
+    $url = parse_url(getenv('JAWSDB_URL'));
     $server = $url["host"];
     $username = $url["user"];
     $password = $url["pass"];
