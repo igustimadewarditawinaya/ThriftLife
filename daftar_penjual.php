@@ -1,24 +1,14 @@
 <?php 
-
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 session_start();
 
-include "koneksi.php"; // Pastikan file ini ada dan tidak error
+include "koneksi.php";
 
 if (!isset($_SESSION['pelanggan'])) {
-	echo "<script>alert('Anda Belum Terdaftar');</script>";
-	echo "<script>location='login.php';</script>";
-	exit;
-}
-?>
-
-//koneksi ke database
-session_start();
-include"koneksi.php";
-if (!isset($_SESSION['pelanggan'])) {
-	echo "<script>alert('Anda Belum Terdaftar');</script>";
-	echo "<script>location='login.php';</script>";
+    echo "<script>alert('Anda Belum Terdaftar');</script>";
+    echo "<script>location='login.php';</script>";
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -143,7 +133,11 @@ if (!isset($_SESSION['pelanggan'])) {
 						</script>
 						";
 					} else {
-						move_uploaded_file($lokasifoto, "assets/img/toko/$namafiks");
+						$upload_path = "assets/img/toko/";
+                        if (!is_dir($upload_path)) {
+                            mkdir($upload_path, 0777, true);
+                        }
+                        move_uploaded_file($lokasifoto, $upload_path . $namafiks);
 
 						$nama_toko =$_POST["nama_toko"];
 						$telepon_toko =$_POST["telepon_toko"];
