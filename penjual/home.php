@@ -128,7 +128,7 @@
 <!-- 
 <?php 
 $ambil=$koneksi->query("SELECT * FROM toko LEFT JOIN pelanggan ON toko.id_toko=pelanggan.id_pelanggan WHERE id_toko") ;
-$pecah=$ambil->fetch_assoc();?>
+$pecah=$ambil->fetch(PDO::FETCH_ASSOC);?>
 
 <h2 class="text-center">Selamat Datang Penjual <?php echo $pecah['nama_toko']; ?></h2>
 
