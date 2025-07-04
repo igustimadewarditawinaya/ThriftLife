@@ -1,8 +1,9 @@
 <?php 	
+$datapengiriman = array();
 $ambil = $koneksi->query("SELECT * FROM pengiriman");
-while($tiap = $ambil->fetch_assoc())
+while($tiap = $ambil->fetch(PDO::FETCH_ASSOC))
 {
-	$datapengiriman[] = $tiap;
+    $datapengiriman[] = $tiap;
 }
 $semuadata=array();
 $tgl_mulai="";
@@ -23,7 +24,7 @@ if (isset($_POST["kirim"]))
 		WHERE  pembelian.id_toko = '$id_toko'
 		AND pembelian.id_pengiriman='$status' 
 		AND tanggal_pembelian BETWEEN '$tgl_mulai' AND '$tgl_selesai' ");
-	while($pecah = $ambil->fetch_assoc())
+	while($pecah = $ambil->fetch(PDO::FETCH_ASSOC))
 	{
 		$semuadata[]=$pecah;
 	}

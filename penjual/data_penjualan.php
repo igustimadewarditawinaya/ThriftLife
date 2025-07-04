@@ -1,6 +1,6 @@
 <?php  
   $ambil = $koneksi->query("SELECT * FROM toko WHERE id_toko='$id_toko' ");
-  $pecah = $ambil->fetch_assoc();
+  $pecah = $ambil->fetch(PDO::FETCH_ASSOC);
  ?>
 
 <h2><center>Data Penjualan Produk <br> <?=  $pecah['nama_toko'];  ?></center></h2>
@@ -49,7 +49,7 @@
       AND resi_pengiriman  LIKE '%$keyword%'
       LIMIT ".$limitStart.",".$limit);
     $nomor = $limitStart + 1;
-    while($row = mysqli_fetch_array($SqlQuery)){   
+    while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){   
      ?>
        <tr>
        	<td><?php echo $nomor; ?></td>
@@ -83,17 +83,17 @@
 
      $limitStart = ($page - 1) * $limit;
 
-     $SqlQuery = mysqli_query($koneksi, "SELECT * FROM pembelian 
-		JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
-		JOIN toko ON pembelian.id_toko=toko.id_toko
-    JOIN pengiriman ON pembelian.id_pengiriman = pengiriman.id_pengiriman
-    WHERE pembelian.id_toko='$id_toko'
-    ORDER BY id_pembelian
-      LIMIT ".$limitStart.",".$limit);
+     $SqlQuery = $koneksi->query("SELECT * FROM pembelian 
+        JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
+        JOIN toko ON pembelian.id_toko=toko.id_toko
+        JOIN pengiriman ON pembelian.id_pengiriman = pengiriman.id_pengiriman
+        WHERE pembelian.id_toko='$id_toko'
+        ORDER BY id_pembelian
+        LIMIT ".$limitStart.",".$limit);
 
      $nomor = $limitStart + 1;
 
-     while($row = mysqli_fetch_array($SqlQuery)){ 
+     while($row = $SqlQuery->fetch(PDO::FETCH_ASSOC)){ 
 		 ?>
 		<tr>
 			<td><?php echo $nomor; ?></td>
@@ -139,12 +139,12 @@
     <?php }  ?>
 
     <?php
-    $SqlQuery = mysqli_query($koneksi, "SELECT * FROM pembelian 
-		JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
-		JOIN toko ON pembelian.id_toko=toko.id_toko");        
+    $SqlQuery = $koneksi->query("SELECT * FROM pembelian 
+        JOIN pelanggan ON pembelian.id_pelanggan=pelanggan.id_pelanggan
+        JOIN toko ON pembelian.id_toko=toko.id_toko");        
 
       //Hitung semua jumlah data yang berada pada tabel Sisawa
-    $JumlahData = mysqli_num_rows($SqlQuery);
+    $JumlahData = $SqlQuery->rowCount();
 
       // Hitung jumlah halaman yang tersedia
     $jumlahPage = ceil($JumlahData / $limit); 
