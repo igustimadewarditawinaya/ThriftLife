@@ -213,7 +213,7 @@ if (!isset($_SESSION['keranjang']) OR empty($_SESSION['keranjang']))
 						{
 							//mendapatkan data produk berdasarkan id_produk
 							$ambil=$koneksi->query("SELECT * FROM produk WHERE id_produk='$id_produk'");
-							$perproduk = $ambil->fetch_assoc();
+							$perproduk = $ambil->fetch(PDO::FETCH_ASSOC);
 
 							$id_toko = $perproduk['id_toko'];
 							$nama = $perproduk['nama_produk'];
