@@ -1,8 +1,8 @@
- <?php 
+<?php 
  $id_produk= $_GET["id"];
 
  $ambil = $koneksi->query("SELECT * FROM produk LEFT JOIN kategori ON produk.id_kategori=kategori.id_kategori WHERE id_produk='$id_produk'");
- $detailproduk = $ambil->fetch_assoc();
+ $detailproduk = $ambil->fetch(PDO::FETCH_ASSOC);
  ?>
  <h2 class="text-center">Detail Produk</h2>
  <table class="table striped">

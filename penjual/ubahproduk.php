@@ -1,6 +1,6 @@
 <?php 
 $ambil=$koneksi->query("SELECT * FROM produk WHERE id_produk='$_GET[id]'");
-$pecah=$ambil->fetch_assoc();
+$pecah=$ambil->fetch(PDO::FETCH_ASSOC);
 
 // echo "<pre>";
 // print_r($pecah);
@@ -11,7 +11,7 @@ $pecah=$ambil->fetch_assoc();
 $datakategori= array();
 
 $ambil=$koneksi->query("SELECT * FROM kategori");
-while ($tiap = $ambil->fetch_assoc())
+while ($tiap = $ambil->fetch(PDO::FETCH_ASSOC))
 {
 	$datakategori[] = $tiap;
 }
