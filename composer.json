@@ -2,7 +2,8 @@
   "require": {
     "php": "^8.0",
     "mpdf/mpdf": "^8.2",
-    "setasign/fpdi": "^2.6"
+    "setasign/fpdi": "^2.6",
+    "ext-gd": "*"
   },
   "config": {
     "platform": {
