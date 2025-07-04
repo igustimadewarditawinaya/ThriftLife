@@ -9,7 +9,7 @@ $id_produk = $_GET["id"];
 $ambil = $koneksi->query("SELECT * FROM produk 
 	LEFT JOIN toko ON produk.id_toko=toko.id_toko 
 	WHERE id_produk='$id_produk'"); 
-$detail =$ambil->fetch_assoc();
+$detail =$ambil->fetch(PDO::FETCH_ASSOC);
 if (isset($_SESSION['pelanggan'])) {
 	if ($_SESSION['pelanggan']['id_pelanggan'] == $detail['id_toko']) {
 		echo "<script>alert('Tidak dapat membeli produk sendiri');</script>";
