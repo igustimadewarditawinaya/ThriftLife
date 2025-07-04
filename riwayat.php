@@ -1,4 +1,4 @@
- <?php 
+<?php 
 //koneksi ke database
  session_start();
  include'koneksi.php';
@@ -40,7 +40,7 @@
  				$id_pelanggan = $_SESSION["pelanggan"]["id_pelanggan"];
  				$ambil=$koneksi->query("SELECT * FROM pembelian 
  					JOIN pengiriman ON pembelian.id_pengiriman = pengiriman.id_pengiriman WHERE id_pelanggan='$id_pelanggan'");
- 				while($pecah=$ambil->fetch_assoc()){
+ 				while($pecah=$ambil->fetch(PDO::FETCH_ASSOC)){
  					?>
  					<tr>
  						<td><?php echo 	$nomor; ?></td>
@@ -76,5 +76,5 @@
 <!-- footer -->
 <?php include"footer.php" ;?>
 
- 
+
 
