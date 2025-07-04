@@ -1,4 +1,4 @@
-  <?php 	
+<?php 	
   session_start();
   include 'koneksi.php';
 // mendapatkan id produk dari url
@@ -8,7 +8,7 @@
 
   $ambil = $koneksi->query("SELECT * FROM toko 
   	JOIN produk ON toko.id_toko = produk.id_toko WHERE produk.id_produk = '$id_produk'"); 
-  $detail =$ambil->fetch_assoc();
+  $detail =$ambil->fetch(PDO::FETCH_ASSOC);
   if (!isset($_SESSION['pelanggan'])) {
   	echo "<script>alert('anda belum terdaftar sebagai pelanggan');</script>";
   	echo "<script>location='daftar.php';</script>";
