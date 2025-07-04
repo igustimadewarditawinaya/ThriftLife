@@ -1,6 +1,6 @@
 <?php 	
 $ambil = $koneksi->query("SELECT * FROM toko WHERE id_toko='$id_toko'");
-$pecah = $ambil->fetch_assoc();
+$pecah = $ambil->fetch(PDO::FETCH_ASSOC);
  ?>
 <h2 class="text-center">Data Produk <br><?php echo $pecah['nama_toko'] ?></h2>
 <br><br><br>	
