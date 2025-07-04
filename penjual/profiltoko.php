@@ -38,7 +38,7 @@ $pecah=$ambil->fetch(PDO::FETCH_ASSOC); ?>
  		$ambil= $koneksi->query("SELECT * FROM produk 
  			LEFT JOIN toko ON produk.id_toko=toko.id_toko
  			WHERE produk.id_toko='$id_toko'");
- 		while ($detail = $ambil->fetch_assoc()) {
+ 		while ($detail = $ambil->fetch(PDO::FETCH_ASSOC)) {
  			$data[]= $detail;
  		}
  		$produk = 0;
@@ -132,7 +132,7 @@ $pecah=$ambil->fetch(PDO::FETCH_ASSOC); ?>
 				<?php $ambil=$koneksi->query("SELECT * FROM produk 
 					LEFT JOIN kategori ON produk.id_kategori=kategori.id_kategori
 					WHERE produk.id_toko='$id_toko' "); ?>
-					<?php while($perproduk = $ambil->fetch_assoc()){ ?>
+					<?php while($perproduk = $ambil->fetch(PDO::FETCH_ASSOC)){ ?>
 						<div class="grid-example col m3 s12">
 							<div class=" responisve-card card hoverable">
 								<div class="card-image waves-effect waves-block waves-light">
